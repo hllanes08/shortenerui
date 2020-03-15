@@ -41,7 +41,7 @@ class Top extends Component{
 	    <th scope="col">#</th>
 	    <th scope="col">Code</th>
 	    <th scope="col">Site</th>
-	    <th scope="col">Frencuency</th>
+	    <th scope="col">Frecuency</th>
 	    </tr>
 	    </thead>
 	    <tbody>

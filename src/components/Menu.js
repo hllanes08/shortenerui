@@ -8,6 +8,7 @@ import {
 
 import Search from './Search.js';
 import Top from './Top.js';
+import New from './New.js';
 
 class Menu extends Component{
 
@@ -24,6 +25,8 @@ class Menu extends Component{
           <div className="navbar-nav">
             <a className="nav-item nav-link active" href="/">Home <span className="sr-only">(current)</span></a>
 	    <a className="nav-item nav-link active" href="/top">Top 100<span className="sr-only">(current)</span></a>
+	    <a className="nav-item nav-link active" href="/new">New<span className="sr-only">(current)</span></a>
+
           </div>
 	 </div>
       </nav>
@@ -35,6 +38,10 @@ class Menu extends Component{
             <Route path="/top">
               <Top />
             </Route>
+	    <Route path="/new">
+              <New />
+            </Route>
+
       </Switch>
       </div>
     </Router>
