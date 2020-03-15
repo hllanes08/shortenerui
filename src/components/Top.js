@@ -17,12 +17,11 @@ class Top extends Component{
     }).then(results => {
       return results.json();
     }).then(data => {
-      this.setState({records: data.urls});
+      if(data.success){
+        this.setState({records: data.urls });
+      }
     });
-    /*var data = response.json();
-    this.setState({
-      records: data.urls
-    })*/
+ 
   }
 
   componentDidMount() {
