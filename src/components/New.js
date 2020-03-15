@@ -32,13 +32,16 @@ class New extends Component{
 
   onCreate(e){
    var dataPost = {
-     url: this.state.url,
-     code: this.state.code
+     shortcode: {
+       url: this.state.url,
+       code: this.state.code
+     }
    };
 
    fetch('https://shortenerguy.herokuapp.com/api/shortener', {
      method: 'POST',
-     body: dataPost 
+     body: JSON.stringify(dataPost),
+     headers: { "Content-Type": "application/json" }
    }).then(results => {
       return results.json();
     }).then(data => {
@@ -46,7 +49,7 @@ class New extends Component{
       if(data.success){
         this.setState({ save: true});
       }else{
-      
+        this.setState({ errors: data.errors}); 
       }
     });
    
@@ -59,14 +62,14 @@ class New extends Component{
 	<form>
 	 <div className="form-group row">
 	   { !this.state.save ? 
-   	   <input className="form-control form-control-lg" type="text" onChange={this.onCodeChange} placeholder="Code"/>
+   	   <input className="form-control form-control-lg" type="text" onChange={this.onChangeCode} placeholder="Code"/>
 : 
 	   <span className="badge badge-primary">{this.state.code}</span>
 	   }
 	 </div>
 	 <div className="form-group row">
 	   { !this.state.save ? 
-   	   <input className="form-control form-control-lg" type="text" onChange={this.onUrlChange} placeholder="URL"/> : 
+   	   <input className="form-control form-control-lg" type="text" onChange={this.onChangeUrl} placeholder="URL"/> : 
 	    <span className="badge badge-primary">{this.state.url }</span> }
 
 	 </div>
@@ -77,7 +80,7 @@ class New extends Component{
    	   <span className="badge badge-danger">{ this.state.errors }</span>
 	 </div> : '' }
          <div className="form-group row">
-	    <button type="button" className="btn btn-outline-primary" onClick={this.onCreate} disabled={this.state.code !== '' && this.state.url !== '' }>Create</button>
+	    <button type="button" className="btn btn-outline-primary" onClick={this.onCreate} disabled={this.state.code === '' || this.state.url === '' }>Create</button>
 	  </div>
 	 </form>
       </div>
