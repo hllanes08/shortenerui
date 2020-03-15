@@ -9,12 +9,16 @@ class Top extends Component{
   }
 
   getRecords(){
-    var response = fetch("https://shortenerguy.herokuapp.com/api/top",{ 
+    var _instance = this;
+    var response = fetch("https://shortenerguy.herokuapp.com/api/top",{
     headers: new Headers({
      'Access-Control-Allow-Origin':'*'
      })
+    }).then(results => {
+      return results.json();
+    }).then(data => {
+      this.setState({records: data.urls});
     });
-    console.log(response);
     /*var data = response.json();
     this.setState({
       records: data.urls
